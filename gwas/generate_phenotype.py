@@ -2,11 +2,6 @@ import hail as hl
 import pandas as pd
 import sys
 
-def get_phenotype(gt):
-    if gt == '0|0':
-        return 1  # control
-    else:
-        return 2  # variant
 def create_phenotype_file(vcf_file, chrom, pos, ref, alt, output_file):
     hl.init()
 
