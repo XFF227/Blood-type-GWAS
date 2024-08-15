@@ -22,19 +22,18 @@ def convert_vcf_to_plink(local_vcf_path, output_prefix, threadnum):
     # Export to PLINK format
     hl.export_plink(mt, output_prefix)
     print(f"Plink files generated with prefix '{output_prefix}'")
+    return mt
 
-def create_phenotype_file(vcf_file, chrom, pos, ref, alt, output_file):
 
-    # read vcf
-    mt = hl.import_vcf(vcf_file, reference_genome='GRCh37', force=True)
-    print("sucess import")
+def create_phenotype_file(mt, chrom, pos, ref, alt, output_file):
     # set variant
     variant = mt.filter_rows(
         (mt.locus.contig == chrom) &
         (mt.locus.position == pos) &
-        (mt.alleles[0] == ref) &
-        (mt.alleles[1] == alt)
+        (str(mt.alleles[0]) == ref) &
+        (str(mt.alleles[1]) == alt)
     )
+
     print("success create variant profile")
     # find variant
     if variant.count_rows() == 0:
