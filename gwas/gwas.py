@@ -9,7 +9,8 @@ def convert_vcf_to_plink(local_vcf_path, output_prefix, threadnum):
     :param local_vcf_path: Path to the local VCF file
     :param output_prefix: Prefix for the output PLINK files
     """
-    hl.init(min_block_size=128, n_threads=threadnum)
+    hl.init(spark_conf={'spark.executor.cores': str(threadnum),
+                        'spark.driver.memory': '8g'})
 
     # Import VCF from the local file system
     mt = hl.import_vcf(local_vcf_path, reference_genome='GRCh37', force=True)
