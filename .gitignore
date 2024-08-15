@@ -1,0 +1,31 @@
+
+# files to be ignored
+*.glm.firth
+*glm.firth.id
+
+# sequence data
+*.vcf
+*.gz
+*.tbi
+
+# plink output
+*.csi
+*.bim
+*.bed
+*.tped
+*.log
+*.fam
+*.ped
+*.nosex
+*.tfam
+*.map
+.nf*
+*.pdf
+
+# vs code configuration
+*.vscode
+
+# folders to ignore
+ignore/
+plink_1KG/
+plink_results/
