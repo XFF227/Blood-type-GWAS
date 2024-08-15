@@ -23,7 +23,7 @@ maf_threshold=0.01
 # Run the Python script with the specified function and arguments
 python -c "
 from gwas import convert_vcf_to_plink, create_phenotype_file, run_gwas_hail
-convert_vcf_to_plink('$local_vcf_path', '$output_prefix')
+convert_vcf_to_plink('$local_vcf_path', '$output_prefix', '$threadnum')
 create_phenotype_file('$vcf_file', '$chrom', '$pos', '$ref', '$alt', '$output_file')
-run_gwas_hail($genotypeFile, $phenotypeFile, $colName, $maf_threshold, $output_prefix, $threadnum)
+run_gwas_hail('$genotypeFile', '$phenotypeFile', '$colName', '$maf_threshold', '$output_prefix')
 "

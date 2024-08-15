@@ -2,14 +2,14 @@ import hail as hl
 import pandas as pd
 
 
-def convert_vcf_to_plink(local_vcf_path, output_prefix):
+def convert_vcf_to_plink(local_vcf_path, output_prefix, threadnum):
     """
     Converts a VCF file to PLINK format using Hail.
 
     :param local_vcf_path: Path to the local VCF file
     :param output_prefix: Prefix for the output PLINK files
     """
-    hl.init()
+    hl.init(min_block_size=128, n_threads=threadnum)
 
     # Import VCF from the local file system
     mt = hl.import_vcf(local_vcf_path, reference_genome='GRCh37', force=True)
@@ -63,9 +63,8 @@ def create_phenotype_file(vcf_file, chrom, pos, ref, alt, output_file):
     print(f"Phenotype file saved to {output_file}")
 
 
-def run_gwas_hail(genotype_file, phenotype_file, col_name, maf_threshold, output_prefix, threadnum):
+def run_gwas_hail(genotype_file, phenotype_file, col_name, maf_threshold, output_prefix):
 
-    hl.init(min_block_size=128, n_threads=threadnum)
     mt = hl.read_matrix_table(genotype_file)
     phenotypes = hl.import_table(phenotype_file, key='sample_id')
     mt = mt.annotate_cols(pheno=phenotypes[mt.s])
