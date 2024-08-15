@@ -82,5 +82,4 @@ def run_gwas_hail(genotype_file, phenotype_file, col_name, maf_threshold, output
     gwas_result = gwas.rows()
     gwas_result.export(f'{output_prefix}.gwas.txt')
     hl.stop()
-
-    return gwas_result_path
+    print("success create gwas result")
