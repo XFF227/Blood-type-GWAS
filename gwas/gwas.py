@@ -24,7 +24,6 @@ def convert_vcf_to_plink(local_vcf_path, output_prefix, threadnum):
     print(f"Plink files generated with prefix '{output_prefix}'")
 
 def create_phenotype_file(vcf_file, chrom, pos, ref, alt, output_file):
-    hl.init()
 
     # read vcf
     mt = hl.import_vcf(vcf_file, reference_genome='GRCh37', force=True)
